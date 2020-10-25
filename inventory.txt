@@ -1,3 +1,2 @@
 [all]
-
-server ansible_host=34.220.2.77 ansible_ssh_common_args= '-o UserKnownHostsFile=/dev/null'
+34.220.2.77
