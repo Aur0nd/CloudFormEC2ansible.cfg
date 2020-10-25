@@ -5,4 +5,4 @@
   roles:
    - setup #
   [defaults]
-host_key_checking = False
+  host_key_checking=$False
