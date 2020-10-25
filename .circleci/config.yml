@@ -7,14 +7,14 @@ jobs:   #Test SSH-fingerprints
       - checkout
       - add_ssh_keys:
           fingerprints: [8e:1e:d6:e9:d5:4f:e0:d6:b3:0b:88:5d:4c:35:e5:f8]
-      - run:
+      - run:  
           name: Install dependencies
           command: | #Install the dependencies
             apk add --update ansible  
       - run:
           name: Execute playbook
           command: |
-            ansible-playbook main.yml -i inventory.txt
+           ANSIBLE_HOST_KEY_CHECKING=False  ansible-playbook main.yml -i inventory.txt
 
 workflows:
   my_workflo:
