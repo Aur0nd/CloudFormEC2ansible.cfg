@@ -1,0 +1,17 @@
+version: 2.1
+jobs:   #Test SSH-fingerprints
+  configure_infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: [8e:1e:d6:e9:d5:4f:e0:d6:b3:0b:88:5d:4c:35:e5:f8]
+      - run:
+          name: Execute playbook
+          command: |
+            ansible-playbook main.yml -i inventory.txt
+
+workflows:
+  jobs:
+    - configure_infrastructure
