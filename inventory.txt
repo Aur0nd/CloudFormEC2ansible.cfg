@@ -1,2 +1,2 @@
 [all]
-Bastian-WORKSPACESEC2=34.220.2.77 ansible_ssh_common_args='-o StrictHostKeyChecking=no' 
+34.220.2.77 ansible_ssh_common_args='-o StrictHostKeyChecking=no' 
