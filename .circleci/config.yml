@@ -13,5 +13,6 @@ jobs:   #Test SSH-fingerprints
             ansible-playbook main.yml -i inventory.txt
 
 workflows:
-  jobs:
-    - configure_infrastructure
+  my_workflo:
+    jobs:
+      - configure_infrastructure
