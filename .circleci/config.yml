@@ -6,7 +6,7 @@ jobs:   #Test SSH-fingerprints
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: [8e:1e:d6:e9:d5:4f:e0:d6:b3:0b:88:5d:4c:35:e5:f8]
+          fingerprints: ["8e:1e:d6:e9:d5:4f:e0:d6:b3:0b:88:5d:4c:35:e5:f8"]
       - run:  
           name: Install dependencies
           command: | #Install the dependencies
