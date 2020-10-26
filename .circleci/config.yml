@@ -19,8 +19,8 @@ jobs:   #Test SSH-fingerprints
        - image: circleci/node:13.8.0 
     steps:
       - checkout
-      - run:  Run Smoke Test
-          name: 
+      - run:  
+          name: RunSmokeTest
           command: | 
             curl 34.220.2.77:3000 
 
