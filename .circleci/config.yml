@@ -15,14 +15,15 @@ jobs:   #Test SSH-fingerprints
           name: Execute playbook
           command: |
             ansible-playbook main.yml -i inventory.txt
-
     smoketest:
-      - image: circleci/node:13.8.0
+       - image: circleci/node:13.8.0 
     steps:
-       -run:
-          name: Run Smoke Test
-          command: |
-            curl 34.220.2.77:3000
+      - checkout
+      - run:  Run Smoke Test
+          name: 
+          command: | 
+            curl 34.220.2.77:3000 
+
 
 workflows:
   my_workflo:
