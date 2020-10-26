@@ -22,7 +22,7 @@ jobs:   #Test SSH-fingerprints
       - run:
           name: Create backend
           command: | 
-                  aws cloudformation create-stack --stack-name prod-{CIRCLE_WORKFLOW_ID} --template-body file://CF/template.yml
+                  aws cloudformation create-stack --stack-name prod-{CIRCLE_WORKFLOW_ID} --template-body file://CF/template.yml --region us-west-2
       - destroy_environment
 
 
