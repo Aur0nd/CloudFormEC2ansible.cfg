@@ -2,6 +2,11 @@ version: 2.1
 
 commands:
   destroy_environment:
+    docker:
+     - image: amazon/aws-cli
+       auth:
+        username: $ubuntuID
+        password: $ubuntukey
     steps:
       - run:
           name: Destroy environment
