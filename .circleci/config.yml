@@ -1,5 +1,29 @@
 version: 2.1
+commands:
+  destroy_environments:
+    - run:
+        name: Destroy environment
+        command: |
+            aws cloudformation delete-stack --stack-name prod-{CIRCLE_WORKFLOW_ID}
+
+
 jobs:   #Test SSH-fingerprints
+  create-infrastructure:
+    docker:
+     - image: amazon/aws-cli
+       auth:
+        username: $ubuntuID
+        password: $ubuntukey
+    steps:
+      - checkout
+      - run:
+          name: Create backend
+          command: | 
+                  aws cloudformation create-stack --stack-name prod-{CIRCLE_WORKFLOW_ID} --template-body file://CF/template.yml
+      - run: return 1
+      - destroy_environments
+        when: on_fail
+
   configure_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -7,23 +31,32 @@ jobs:   #Test SSH-fingerprints
       - checkout
       - add_ssh_keys:
           fingerprints: ["be:21:ae:6a:5e:7b:6f:ef:9b:cb:31:21:d4:69:93:bc"]
-      - run:  
+        - run:  
           name: Install dependencies
           command: | #Install the dependencies
             apk add --update ansible  
-      - run:
+        - run:
           name: Execute playbook
           command: |
             ansible-playbook main.yml -i inventory.txt
   smoketest:
     docker:
-       - image: circleci/node:13.8.0 
+      - image: circleci/node:13.8.0 
     steps:
-      - checkout
-      - run:  
-          name: RunSmokeTest
-          command: | 
-            curl 34.220.2.77:3000 
+        - run: apk add --update curl
+        - run:
+            name: smoke test.
+            command: |
+              URL="34.220.2.77:3000"
+              if curl -s --head ${URL} # test if website exists
+              then
+               return 0
+              else
+               return 1
+              fi
+        - run: return 1
+        - destroy_environments
+          when: on_fail
 
 
 workflows:
