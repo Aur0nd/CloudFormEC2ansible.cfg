@@ -16,6 +16,7 @@ jobs:   #Test SSH-fingerprints
           command: |
             ansible-playbook main.yml -i inventory.txt
     smoketest:
+      docker:
        - image: circleci/node:13.8.0 
     steps:
       - checkout
