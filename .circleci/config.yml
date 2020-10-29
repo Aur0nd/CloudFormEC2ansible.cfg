@@ -30,7 +30,7 @@ jobs:   #Test SSH-fingerprints
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["be:21:ae:6a:5e:7b:6f:ef:9b:cb:31:21:d4:69:93:bc"]
+          fingerprints: [""]
       - run:  
           name: Install dependencies
           command: | #Install the dependencies
